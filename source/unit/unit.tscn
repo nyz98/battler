@@ -123,3 +123,11 @@ unit_stats = ExtResource("2_str2c")
 sprite_frames = SubResource("SpriteFrames_26oi8")
 animation = &"moving"
 frame_progress = 0.768134
+
+[node name="TextEdit" type="TextEdit" parent="."]
+custom_minimum_size = Vector2(28, 28)
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 11
+text = "0"
+editable = false

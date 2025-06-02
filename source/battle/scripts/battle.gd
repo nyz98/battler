@@ -56,7 +56,12 @@ func get_grid():
 
 
 func _on_unit_done(done_unit: Unit) -> void:
+	done_unit.is_selected = false
 	unit_queue.erase(done_unit)
 	
 	if not unit_queue.is_empty():
 		unit_queue[0].is_selected = true
+
+
+func _on_button_pressed() -> void:
+	emit_signal("unit_done", unit_queue[0])

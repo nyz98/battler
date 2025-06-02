@@ -6,6 +6,8 @@ extends Node2D
 
 @onready var tile_map_node: Node2D = %TileMapNode
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var remaining_movement := unit_stats.movement_points
+@onready var text_edit: TextEdit = $TextEdit
 
 var current_id_path: Array[Vector2i]
 var moving: bool = false
@@ -38,18 +40,33 @@ func _input(event):
 func _move(current_id_path: Array[Vector2i]) -> void:
 	var tile_map: TileMap = tile_map_node.tile_map
 	var move_tween: Tween = get_tree().create_tween()
-	var tween_speed: float = 1.5/len(current_id_path)
-	print(tween_speed)
+	var tween_speed: float = min(0.5, 1.5/len(current_id_path))
 	sprite.play("moving")
 	for id in current_id_path:
 		var target_position = tile_map.map_to_local(id)
+		var total_movement_cost = _get_total_movement_cost(tile_map, id)
+		if total_movement_cost > remaining_movement:
+			move_tween.tween_callback(_done_moving)
+			break
+		remaining_movement -= total_movement_cost
+		text_edit.text = str(remaining_movement)
 		move_tween.tween_property(self, "position", target_position, tween_speed)
 	move_tween.tween_callback(_done_moving)
 	
 
 func _done_moving() -> void:
-	sprite.play.bind("default")
+	sprite.play("default")
 	moving = false
-	is_selected = false
-	var battle: Node2D = get_parent()
-	battle.emit_signal("unit_done", self)
+	if remaining_movement == 0:
+		var battle: Node2D = get_parent()
+		battle.emit_signal("unit_done", self)
+
+
+func _get_total_movement_cost(tile_map: TileMap, location: Vector2) -> int:
+	var total_layers = tile_map.get_layers_count()
+	var total_movement_cost = 0
+	for layer in total_layers:
+		var tile_data = tile_map.get_cell_tile_data(layer, location)
+		if tile_data != null:
+			total_movement_cost += tile_data.get_custom_data("cost")
+	return total_movement_cost

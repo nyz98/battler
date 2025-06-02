@@ -49,4 +49,12 @@ player = true
 position = Vector2(336, 226)
 unit_stats = ExtResource("5_wxwfl")
 
+[node name="Button" type="Button" parent="."]
+offset_left = 552.0
+offset_top = 322.0
+offset_right = 628.0
+offset_bottom = 353.0
+text = "end turn"
+
 [connection signal="unit_done" from="." to="." method="_on_unit_done"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
