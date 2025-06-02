@@ -24,6 +24,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 tile_set = SubResource("TileSet_1rmot")
 format = 2
+layer_0/modulate = Color(1, 1, 1, 0.27451)
 script = ExtResource("4_5x8jy")
 
 [node name="Unit" parent="." instance=ExtResource("4_bamhp")]

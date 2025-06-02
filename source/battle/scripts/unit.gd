@@ -44,29 +44,29 @@ func _move(current_id_path: Array[Vector2i]) -> void:
 	sprite.play("moving")
 	for id in current_id_path:
 		var target_position = tile_map.map_to_local(id)
-		var total_movement_cost = _get_total_movement_cost(tile_map, id)
-		if total_movement_cost > remaining_movement:
+		if remaining_movement <= 0:
 			move_tween.tween_callback(_done_moving)
 			break
-		remaining_movement -= total_movement_cost
+		remaining_movement -= 1
 		text_edit.text = str(remaining_movement)
 		move_tween.tween_property(self, "position", target_position, tween_speed)
 	move_tween.tween_callback(_done_moving)
 	
 
 func _done_moving() -> void:
+	var battle: Node2D = get_parent()
 	sprite.play("default")
 	moving = false
+	battle.draw_walkable_tiles(self)
 	if remaining_movement == 0:
-		var battle: Node2D = get_parent()
 		battle.emit_signal("unit_done", self)
 
 
-func _get_total_movement_cost(tile_map: TileMap, location: Vector2) -> int:
-	var total_layers = tile_map.get_layers_count()
-	var total_movement_cost = 0
-	for layer in total_layers:
-		var tile_data = tile_map.get_cell_tile_data(layer, location)
-		if tile_data != null:
-			total_movement_cost += tile_data.get_custom_data("cost")
-	return total_movement_cost
+#func _get_total_movement_cost(tile_map: TileMap, location: Vector2) -> int:
+	#var total_layers = tile_map.get_layers_count()
+	#var total_movement_cost = 0
+	#for layer in total_layers:
+		#var tile_data = tile_map.get_cell_tile_data(layer, location)
+		#if tile_data != null:
+			#total_movement_cost += tile_data.get_custom_data("cost")
+	#return total_movement_cost
