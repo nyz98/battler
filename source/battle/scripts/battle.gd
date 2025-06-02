@@ -7,8 +7,6 @@ signal unit_done
 
 ## Mapping of coordinates of a cell to a reference to the unit it contains.
 var astar_grid: AStarGrid2D
-var _active_unit: Unit
-var _walkable_cells := []
 var unit_queue: Array[Unit] = []
 var current_grid: Vector2
 var walkable_tiles: Array
@@ -57,22 +55,19 @@ func get_grid():
 
 func _get_walkable_tiles(active_unit: Unit) -> Array:
 	var tile_map: TileMap = tile_map_node.tile_map
-	var walkable_tiles =  []
+	walkable_tiles =  []
 	for x in tile_map.get_used_rect().size.x:
 		for y in tile_map.get_used_rect().size.y:
 			var tile_position = Vector2i(
 				x + tile_map.get_used_rect().position.x,
 				y + tile_map.get_used_rect().position.y
 			)
-			print(tile_position, active_unit.global_position)
 			if astar_grid.is_point_solid(tile_position):
 				continue
 			var id_path = astar_grid.get_id_path(
 				tile_map.local_to_map(active_unit.global_position), 
 				tile_position
 			).slice(1)
-			print(id_path)
-			print(len(id_path))
 			if len(id_path) <= active_unit.remaining_movement and len(id_path) > 0:
 				walkable_tiles.append(tile_position)
 	return walkable_tiles

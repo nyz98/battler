@@ -9,7 +9,7 @@ func _draw() -> void:
 	draw_rect(Rect2(tile_map.map_to_local(current_cell) - Vector2(8, 8), Vector2(16, 16)), Color.ALICE_BLUE, false, 1.0)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not can_draw:
 		return
 		

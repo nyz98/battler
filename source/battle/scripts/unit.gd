@@ -37,12 +37,14 @@ func _input(event):
 		current_id_path = id_path
 	_move(current_id_path)
 
-func _move(current_id_path: Array[Vector2i]) -> void:
+func _move(id_path: Array[Vector2i]) -> void:
 	var tile_map: TileMap = tile_map_node.tile_map
 	var move_tween: Tween = get_tree().create_tween()
-	var tween_speed: float = min(0.5, 1.5/len(current_id_path))
+	var tween_speed: float = min(0.5, 1.5/len(id_path))
+	var battle: Node2D = get_parent()
+	battle._unit_overlay.clear()
 	sprite.play("moving")
-	for id in current_id_path:
+	for id in id_path:
 		var target_position = tile_map.map_to_local(id)
 		if remaining_movement <= 0:
 			move_tween.tween_callback(_done_moving)

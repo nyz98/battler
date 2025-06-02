@@ -37,12 +37,12 @@ unit_stats = ExtResource("5_wxwfl")
 player = true
 
 [node name="Unit3" parent="." instance=ExtResource("4_bamhp")]
-position = Vector2(446, 252)
+position = Vector2(588, 163)
 unit_stats = ExtResource("5_wxwfl")
 player = true
 
 [node name="Unit5" parent="." instance=ExtResource("4_bamhp")]
-position = Vector2(446, 252)
+position = Vector2(514, 245)
 unit_stats = ExtResource("5_wxwfl")
 player = true
 
