@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://bamp10073o0lw"]
+
+[ext_resource type="Script" uid="uid://bespd5s68pbr2" path="res://source/battle/scripts/battle.gd" id="1_bamhp"]
+[ext_resource type="PackedScene" uid="uid://dwxrooynkfvwh" path="res://source/battle/tilemaps/default.tscn" id="2_jcoog"]
+[ext_resource type="Texture2D" uid="uid://bfp82m73f5y2g" path="res://asset/movement/overlay.png" id="3_wxwfl"]
+[ext_resource type="Script" uid="uid://bndg7u8s2x154" path="res://source/battle/scripts/unit_overlay.gd" id="4_5x8jy"]
+[ext_resource type="PackedScene" uid="uid://butn5y5arn0l4" path="res://source/unit/unit.tscn" id="4_bamhp"]
+[ext_resource type="Resource" uid="uid://clypx6xbemfk1" path="res://source/unit/unit_stats/orc.tres" id="5_wxwfl"]
+[ext_resource type="Script" uid="uid://d20640ac5b81j" path="res://source/unit/unit_stats.gd" id="6_jcoog"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jcoog"]
+texture = ExtResource("3_wxwfl")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_1rmot"]
+sources/0 = SubResource("TileSetAtlasSource_jcoog")
+
+[sub_resource type="Resource" id="Resource_5x8jy"]
+script = ExtResource("6_jcoog")
+speed = 80
+movement_points = 6
+health = 2
+metadata/_custom_type_script = "uid://d20640ac5b81j"
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_bamhp")
+
+[node name="TileMap" parent="." instance=ExtResource("2_jcoog")]
+unique_name_in_owner = true
+
+[node name="UnitOverlay" type="TileMap" parent="."]
+unique_name_in_owner = true
+tile_set = SubResource("TileSet_1rmot")
+format = 2
+script = ExtResource("4_5x8jy")
+
+[node name="Unit" parent="." instance=ExtResource("4_bamhp")]
+position = Vector2(383, 275)
+player = true
+
+[node name="Unit2" parent="." instance=ExtResource("4_bamhp")]
+position = Vector2(446, 252)
+unit_stats = ExtResource("5_wxwfl")
+player = true
+
+[node name="Unit3" parent="." instance=ExtResource("4_bamhp")]
+position = Vector2(343, 199)
+unit_stats = SubResource("Resource_5x8jy")
+
+[node name="Unit4" parent="." instance=ExtResource("4_bamhp")]
+position = Vector2(336, 226)
+unit_stats = ExtResource("5_wxwfl")

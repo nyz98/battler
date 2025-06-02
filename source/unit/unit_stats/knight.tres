@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=2 format=3 uid="uid://2qr17yvwbasd"]
+
+[ext_resource type="Script" uid="uid://d20640ac5b81j" path="res://source/unit/unit_stats.gd" id="1_qn73c"]
+
+[resource]
+script = ExtResource("1_qn73c")
+speed = 0
+movement_points = 6
+health = 2
