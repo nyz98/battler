@@ -2,12 +2,13 @@ extends Node2D
 
 @onready var tile_map: TileMap = $TileMap
 @onready var current_cell: Vector2i = tile_map.local_to_map(get_global_mouse_position())
+@onready var texture: Texture2D
 
 var can_draw := false
+var cursor = preload("res://asset/movement/cursor.svg")
 
 func _draw() -> void:
-	draw_rect(Rect2(tile_map.map_to_local(current_cell) - Vector2(8, 8), Vector2(16, 16)), Color.ALICE_BLUE, false, 1.0)
-
+	draw_texture(cursor, tile_map.map_to_local(current_cell) - Vector2(8, 8))
 
 func _physics_process(_delta: float) -> void:
 	if not can_draw:

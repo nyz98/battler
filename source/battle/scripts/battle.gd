@@ -13,9 +13,9 @@ var walkable_tiles: Array
 
 
 func _ready():
-	_setup_astar_grid(tile_map_node.tile_map)
-	get_grid()
+	_setup_astar_grid()
 	sort_unit_queue()
+	get_grid()
 	draw_walkable_tiles(unit_queue[0])
 
 
@@ -37,20 +37,29 @@ static func is_faster(a: Unit, b: Unit) -> bool:
 
 func get_grid():
 	var tile_map = tile_map_node.tile_map
-	
-	
+	var unit_positions = get_units_position(tile_map)
+	print(unit_positions)
+	astar_grid.clear()
+	astar_grid.region = tile_map.get_used_rect()
+	astar_grid.update()
+
 	for x in tile_map.get_used_rect().size.x:
 		for y in tile_map.get_used_rect().size.y:
 			var tile_position = Vector2i(
 				x + tile_map.get_used_rect().position.x,
 				y + tile_map.get_used_rect().position.y
 			)
+			if tile_position in unit_positions:
+				astar_grid.set_point_solid(tile_position)
+				continue
+				
 			for layer in tile_map.get_layers_count():
 				var tile_data = tile_map.get_cell_tile_data(layer, tile_position)
 				if tile_data == null:
 					continue
 				if tile_data.get_custom_data("walkable") == false:
 					astar_grid.set_point_solid(tile_position)
+
 
 
 func _get_walkable_tiles(active_unit: Unit) -> Array:
@@ -87,7 +96,8 @@ func _on_button_pressed() -> void:
 	emit_signal("unit_done", unit_queue[0])
 
 
-func _setup_astar_grid(tile_map: TileMap) -> void:
+func _setup_astar_grid() -> void:
+	var tile_map = tile_map_node.tile_map
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
 	astar_grid.cell_size = Vector2(16, 16)
@@ -97,3 +107,9 @@ func _setup_astar_grid(tile_map: TileMap) -> void:
 func draw_walkable_tiles(unit: Unit) -> void:
 	walkable_tiles = _get_walkable_tiles(unit)
 	_unit_overlay.draw_cells(walkable_tiles)
+
+func get_units_position(tile_map: TileMap) -> Array:
+	var unit_positions: Array = []
+	for unit in unit_queue:
+		unit_positions.append(tile_map.local_to_map(unit.global_position))
+	return unit_positions
