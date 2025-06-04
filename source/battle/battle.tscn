@@ -32,19 +32,18 @@ position = Vector2(185, 220)
 player = true
 
 [node name="Unit2" parent="." instance=ExtResource("4_bamhp")]
-position = Vector2(184, 153)
+position = Vector2(248, 175)
 unit_stats = ExtResource("5_wxwfl")
 player = true
 
 [node name="Unit3" parent="." instance=ExtResource("4_bamhp")]
-position = Vector2(233, 105)
+position = Vector2(213, 175)
 unit_stats = ExtResource("5_wxwfl")
 player = true
 
 [node name="Unit5" parent="." instance=ExtResource("4_bamhp")]
 position = Vector2(409, 218)
 unit_stats = ExtResource("5_wxwfl")
-player = true
 
 [node name="Unit4" parent="." instance=ExtResource("4_bamhp")]
 position = Vector2(186, 120)

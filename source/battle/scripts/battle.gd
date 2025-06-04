@@ -38,10 +38,7 @@ static func is_faster(a: Unit, b: Unit) -> bool:
 func get_grid():
 	var tile_map = tile_map_node.tile_map
 	var unit_positions = get_units_position(tile_map)
-	print(unit_positions)
-	astar_grid.clear()
-	astar_grid.region = tile_map.get_used_rect()
-	astar_grid.update()
+	_setup_astar_grid()
 
 	for x in tile_map.get_used_rect().size.x:
 		for y in tile_map.get_used_rect().size.y:
@@ -51,7 +48,6 @@ func get_grid():
 			)
 			if tile_position in unit_positions:
 				astar_grid.set_point_solid(tile_position)
-				continue
 				
 			for layer in tile_map.get_layers_count():
 				var tile_data = tile_map.get_cell_tile_data(layer, tile_position)
@@ -84,6 +80,7 @@ func _get_walkable_tiles(active_unit: Unit) -> Array:
 
 func _on_unit_done(done_unit: Unit) -> void:
 	done_unit.is_selected = false
+	get_grid()
 	unit_queue.erase(done_unit)
 	
 	if not unit_queue.is_empty():
