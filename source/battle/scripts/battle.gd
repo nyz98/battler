@@ -3,14 +3,15 @@ extends Node2D
 signal unit_done
 
 @onready var tile_map_node: Node2D = %TileMapNode
-@onready var _unit_overlay: TileMap = %UnitOverlay
+@onready var movable_overlay: TileMapLayer = %MovableOverlay
+@onready var selected_overlay: TileMapLayer = %SelectedOverlay
+@onready var movepath_overlay: TileMapLayer = %MovepathOverlay
 
 ## Mapping of coordinates of a cell to a reference to the unit it contains.
 var astar_grid: AStarGrid2D
 var unit_queue: Array[Unit] = []
 var current_grid: Vector2
 var walkable_tiles: Array
-
 
 func _ready():
 	_setup_astar_grid()
@@ -73,7 +74,7 @@ func _get_walkable_tiles(active_unit: Unit) -> Array:
 				tile_map.local_to_map(active_unit.global_position), 
 				tile_position
 			).slice(1)
-			if len(id_path) <= active_unit.remaining_movement and len(id_path) > 0:
+			if len(id_path) <= active_unit.unused_movepoints and len(id_path) > 0:
 				walkable_tiles.append(tile_position)
 	return walkable_tiles
 
@@ -90,7 +91,7 @@ func _on_unit_done(done_unit: Unit) -> void:
 
 
 func _on_button_pressed() -> void:
-	emit_signal("unit_done", unit_queue[0])
+	unit_queue[0].emit_signal("move_done")
 
 
 func _setup_astar_grid() -> void:
@@ -103,7 +104,8 @@ func _setup_astar_grid() -> void:
 
 func draw_walkable_tiles(unit: Unit) -> void:
 	walkable_tiles = _get_walkable_tiles(unit)
-	_unit_overlay.draw_cells(walkable_tiles)
+	movable_overlay.draw_cells(walkable_tiles)
+	selected_overlay.draw_cells([tile_map_node.tile_map.local_to_map(unit.global_position)])
 
 func get_units_position(tile_map: TileMap) -> Array:
 	var unit_positions: Array = []

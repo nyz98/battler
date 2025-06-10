@@ -1,79 +1,79 @@
-[gd_scene load_steps=24 format=3 uid="uid://butn5y5arn0l4"]
+[gd_scene load_steps=24 format=3 uid="uid://blpov4n4fdlcv"]
 
-[ext_resource type="Script" uid="uid://bedw0ejr6nu4e" path="res://source/unit/unit.gd" id="1_0dsf3"]
-[ext_resource type="Texture2D" uid="uid://0b52e5w441h3" path="res://asset/character/idle.png" id="2_0dsf3"]
-[ext_resource type="Script" uid="uid://d20640ac5b81j" path="res://source/unit/unit_stats.gd" id="2_tk8yi"]
-[ext_resource type="Script" uid="uid://cj3h487cb5xyl" path="res://source/unit/hurtbox.gd" id="4_str2c"]
+[ext_resource type="Script" uid="uid://bedw0ejr6nu4e" path="res://source/unit/unit.gd" id="1_b3vex"]
+[ext_resource type="Script" uid="uid://d20640ac5b81j" path="res://source/unit/unit_stats.gd" id="2_xyq3r"]
+[ext_resource type="Texture2D" uid="uid://0b52e5w441h3" path="res://asset/character/idle.png" id="3_kdhp7"]
+[ext_resource type="Script" uid="uid://cj3h487cb5xyl" path="res://source/unit/hurtbox.gd" id="4_cbley"]
 
 [sub_resource type="Resource" id="Resource_str2c"]
-script = ExtResource("2_tk8yi")
+script = ExtResource("2_xyq3r")
 speed = 0
 movepoints = 6
 health = 2
 metadata/_custom_type_script = "uid://d20640ac5b81j"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t7qrv"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(0, 80, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cdwmv"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(80, 80, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qx3w2"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(160, 80, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_erubv"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(240, 80, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_caqka"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(0, 160, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iy8vi"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(80, 160, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fxqam"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(160, 160, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgh8s"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(240, 160, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tk8yi"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(0, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_str2c"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(80, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4evfa"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(160, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nku2s"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(240, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w7hgh"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(0, 240, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rr3p4"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(80, 240, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3dgnm"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(160, 240, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tehb2"]
-atlas = ExtResource("2_0dsf3")
+atlas = ExtResource("3_kdhp7")
 region = Rect2(240, 240, 80, 80)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_26oi8"]
@@ -148,10 +148,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4evfa"]
-size = Vector2(15, 15)
+size = Vector2(16, 16)
 
 [node name="Unit" type="Node2D"]
-script = ExtResource("1_0dsf3")
+script = ExtResource("1_b3vex")
 unit_stats = SubResource("Resource_str2c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -168,10 +168,14 @@ editable = false
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("4_str2c")
+script = ExtResource("4_cbley")
 metadata/_custom_type_script = "uid://cj3h487cb5xyl"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_4evfa")
+
+[node name="Unit" type="Node2D" parent="."]
+script = ExtResource("1_b3vex")
+metadata/_custom_type_script = "uid://bedw0ejr6nu4e"
 
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]

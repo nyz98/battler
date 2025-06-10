@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_cbdvy")
 speed = 5
-movement_points = 5
+movepoints = 6
 health = 3

@@ -1,18 +1,119 @@
-[gd_scene load_steps=9 format=3 uid="uid://bamp10073o0lw"]
+[gd_scene load_steps=18 format=3 uid="uid://bamp10073o0lw"]
 
 [ext_resource type="Script" uid="uid://bespd5s68pbr2" path="res://source/battle/scripts/battle.gd" id="1_bamhp"]
 [ext_resource type="PackedScene" uid="uid://bqmpeq18eygbf" path="res://source/battle/tilemaps/default.tscn" id="2_jcoog"]
 [ext_resource type="Texture2D" uid="uid://bfp82m73f5y2g" path="res://asset/movement/overlay.png" id="3_wxwfl"]
-[ext_resource type="Script" uid="uid://bndg7u8s2x154" path="res://source/battle/scripts/unit_overlay.gd" id="4_5x8jy"]
+[ext_resource type="Script" uid="uid://bndg7u8s2x154" path="res://source/battle/scripts/overlay.gd" id="4_5x8jy"]
 [ext_resource type="PackedScene" uid="uid://butn5y5arn0l4" path="res://source/unit/unit.tscn" id="4_bamhp"]
-[ext_resource type="Resource" uid="uid://clypx6xbemfk1" path="res://source/unit/unit_stats/orc.tres" id="5_wxwfl"]
+[ext_resource type="Texture2D" uid="uid://cb2xwvmpxyq5d" path="res://asset/movement/selected.png" id="5_kgaqc"]
+[ext_resource type="Resource" uid="uid://2qr17yvwbasd" path="res://source/unit/unit_stats/knight.tres" id="6_5x8jy"]
+[ext_resource type="Texture2D" uid="uid://bp2fqf0uq87fu" path="res://asset/movement/arrows.png" id="6_fb6nd"]
+[ext_resource type="Script" uid="uid://d20640ac5b81j" path="res://source/unit/unit_stats.gd" id="7_kgaqc"]
+[ext_resource type="Script" uid="uid://ctempmm8bcwgs" path="res://source/battle/scripts/movepath_overlay.gd" id="7_q5x8h"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jcoog"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fb6nd"]
 texture = ExtResource("3_wxwfl")
 0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/bottom_left_corner = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_left_corner = 0
+0:0/0/terrains_peering_bit/top_side = 0
+0:0/0/terrains_peering_bit/top_right_corner = 0
+
+[sub_resource type="TileSet" id="TileSet_q5x8h"]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_fb6nd")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_26oi8"]
+texture = ExtResource("5_kgaqc")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/bottom_left_corner = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_left_corner = 0
+0:0/0/terrains_peering_bit/top_side = 0
+0:0/0/terrains_peering_bit/top_right_corner = 0
 
 [sub_resource type="TileSet" id="TileSet_1rmot"]
-sources/0 = SubResource("TileSetAtlasSource_jcoog")
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_26oi8")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q5x8h"]
+texture = ExtResource("6_fb6nd")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/top_side = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/left_side = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_side = 0
+3:1/0 = 0
+3:1/0/terrain_set = 0
+3:1/0/terrain = 0
+3:1/0/terrains_peering_bit/left_side = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/right_side = 0
+0:2/0/terrains_peering_bit/top_side = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/left_side = 0
+1:2/0/terrains_peering_bit/top_side = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/top_side = 0
+3:2/0 = 0
+3:2/0/terrain_set = 0
+3:2/0/terrain = 0
+3:2/0/terrains_peering_bit/right_side = 0
+
+[sub_resource type="TileSet" id="TileSet_kgaqc"]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "arrow"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_q5x8h")
+
+[sub_resource type="Resource" id="Resource_fb6nd"]
+script = ExtResource("7_kgaqc")
+speed = 0
+movepoints = 6
+health = 2
+metadata/_custom_type_script = "uid://d20640ac5b81j"
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_bamhp")
@@ -20,34 +121,34 @@ script = ExtResource("1_bamhp")
 [node name="TileMapNode" parent="." instance=ExtResource("2_jcoog")]
 unique_name_in_owner = true
 
-[node name="UnitOverlay" type="TileMap" parent="."]
+[node name="MovableOverlay" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
-tile_set = SubResource("TileSet_1rmot")
-format = 2
-layer_0/modulate = Color(1, 1, 1, 0.27451)
+modulate = Color(1, 1, 1, 0.27451)
+use_parent_material = true
+tile_set = SubResource("TileSet_q5x8h")
 script = ExtResource("4_5x8jy")
 
+[node name="SelectedOverlay" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.666667)
+use_parent_material = true
+tile_set = SubResource("TileSet_1rmot")
+script = ExtResource("4_5x8jy")
+
+[node name="MovepathOverlay" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.54902)
+use_parent_material = true
+tile_set = SubResource("TileSet_kgaqc")
+script = ExtResource("7_q5x8h")
+
 [node name="Unit" parent="." instance=ExtResource("4_bamhp")]
-position = Vector2(185, 220)
-player = true
+position = Vector2(217, 193)
+unit_stats = ExtResource("6_5x8jy")
 
 [node name="Unit2" parent="." instance=ExtResource("4_bamhp")]
-position = Vector2(248, 175)
-unit_stats = ExtResource("5_wxwfl")
-player = true
-
-[node name="Unit3" parent="." instance=ExtResource("4_bamhp")]
-position = Vector2(213, 175)
-unit_stats = ExtResource("5_wxwfl")
-player = true
-
-[node name="Unit5" parent="." instance=ExtResource("4_bamhp")]
-position = Vector2(409, 218)
-unit_stats = ExtResource("5_wxwfl")
-
-[node name="Unit4" parent="." instance=ExtResource("4_bamhp")]
-position = Vector2(186, 120)
-unit_stats = ExtResource("5_wxwfl")
+position = Vector2(246, 172)
+unit_stats = SubResource("Resource_fb6nd")
 
 [node name="Button" type="Button" parent="."]
 offset_left = 552.0
